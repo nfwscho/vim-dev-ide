@@ -55,3 +55,23 @@ endPython
 let endExecutionTime = strftime("%T")
 call DisplayTimeDifference(startExecutionTime, endExecutionTime)
 endfunction
+
+
+function! vim_dev_ide#MoveNextSymbol(forword)
+	if a:forword != "forword"
+		echo search('[\{\}\,;\(\)"`\x27]', 'b')
+	else
+		echo search('[\{\}\,;\(\)"`\x27]')
+	endif
+endfunction
+
+function! vim_dev_ide#DevExec(comval)
+	let comval = a:comval
+	if comval == "ascii"
+		echo 'Command Found' . comval
+		execute "terminal('ascii')"
+	else
+		echo 'Command Not Found' . comval
+		execute "terminal(" . comval . ")"
+	endif
+endfunction

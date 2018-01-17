@@ -13,9 +13,11 @@ Py << endPython
 
 import vim, os
 from vim_naver_dic import *
+from vim_dev_common import *
 
 searchword = vim.eval("a:word")
-get_naver_dic(searchword)
+dicstring = get_naver_dic(searchword)
+create_new_buffer(dicstring)
 
 endPython
 
