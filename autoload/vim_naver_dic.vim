@@ -32,7 +32,7 @@ from vim_naver_dic import *
 from vim_dev_common import *
 
 searchsentence = vim.eval("a:sentence")
-papagostring = get_naver_papago(searchsendence)
+papagostring = get_naver_papago(searchsentence)
 create_new_buffer(papagostring)
 
 endPython
