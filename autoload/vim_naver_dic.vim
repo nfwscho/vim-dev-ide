@@ -22,3 +22,20 @@ create_new_buffer(dicstring)
 endPython
 
 endfunction
+
+
+function! vim_naver_dic#GetNaverPapago(sentence)
+Py << endPython
+
+import vim, os
+from vim_naver_dic import *
+from vim_dev_common import *
+
+searchsentence = vim.eval("a:sentence")
+papagostring = get_naver_papago(searchsendence)
+create_new_buffer(papagostring)
+
+endPython
+
+endfunction
+

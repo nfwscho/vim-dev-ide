@@ -96,10 +96,12 @@ class AngaeNaverDic:
 
 		return self.search_result
 
-# AngaeNaverDic().search_naver_dic('sentence')
-# AngaeNaverDic().search_papago(text)
-
 def get_naver_dic(word='none'):
 	dicstring = AngaeNaverDic().search_naver_dic(word)
 	return dicstring
+
+def get_naver_papago(text='none'):
+	papagostring = AngaeNaverDic().search_papago(text)
+	return papagostring
+
 
