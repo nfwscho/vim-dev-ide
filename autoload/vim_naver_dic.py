@@ -78,21 +78,21 @@ class AngaeNaverDic:
 		except IndexError:
 			example = None
 
-		self.search_result += '"{}"에 대한 검색결과'.format(word)
+		self.search_result += '"{}"에 대한 검색결과\n'.format(word)
 		# self.search_result += '='*80
 
 		if phonetic_alpha_us:
-			self.search_result += ' {} '.format(phonetic_alpha_us)
+			self.search_result += ' {} \n'.format(phonetic_alpha_us)
 
 		if phonetic_alpha_uk:
-			self.search_result += ' {} '.format(phonetic_alpha_uk)
+			self.search_result += ' {} \n'.format(phonetic_alpha_uk)
 
 		if word_class:
-			self.search_result += '품사: {}'.format(word_class)
-		self.search_result += '의미: {}'.format(meaning)
+			self.search_result += '품사: {}\n'.format(word_class)
+		self.search_result += '의미: {}\n'.format(meaning)
 
 		if example:
-			self.search_result += '예문: {}'.format(example)
+			self.search_result += '예문: {}\n'.format(example)
 
 		return self.search_result
 
