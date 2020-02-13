@@ -30,10 +30,13 @@ class AngaeNaverDic:
 		else:
 			self.search_result = 'No search word exists'
 
-	def search_papago(self, sentence):
+	def search_papago(self, to, sentence):
 		self.search_sentence = sentence
 		headers = {"X-Naver-Client-Id": "zAPmLQev4f8FVxVowF7O", "X-Naver-Client-Secret": "wrXgfiqNXw"}
-		params = {"source": "en", "target": "ko", "text": self.search_sentence}
+		if to == 'ko':
+			params = {"source": "en", "target": "ko", "text": self.search_sentence}
+		else:
+			params = {"source": "ko", "target": "en", "text": self.search_sentence}
 		response = requests.post(self.papago_url, headers=headers, data=params)
 		# convert json to python dict
 		self.papago_result = response.json()
@@ -100,8 +103,8 @@ def get_naver_dic(word='none'):
 	dicstring = AngaeNaverDic().search_naver_dic(word)
 	return dicstring
 
-def get_naver_papago(text='none'):
-	papagostring = AngaeNaverDic().search_papago(text)
+def get_naver_papago(to='ko', text='none'):
+	papagostring = AngaeNaverDic().search_papago(to, text)
 	return papagostring
 
 
