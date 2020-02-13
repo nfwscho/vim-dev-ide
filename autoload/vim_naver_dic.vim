@@ -38,13 +38,14 @@ endfunction
 
 
 function! vim_naver_dic#GetNaverPapago(sentence)
+let a:word = s:get_visual_selection()
 Py << endPython
 
 import vim, os
 from vim_naver_dic import *
 from vim_dev_common import *
 
-searchsentence = vim.eval("a:sentence")
+searchsentence = vim.eval("a:word")
 papagostring = get_naver_papago(searchsentence)
 create_new_buffer(papagostring)
 
