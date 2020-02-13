@@ -40,17 +40,17 @@ endfunction
 function! vim_naver_dic#GetNaverPapago() abort
 let sentence = s:get_visual_selection()
 
-" Py << endPython
+Py << endPython
 
-" import vim, os
-" from vim_naver_dic import *
-" from vim_dev_common import *
+import vim, os
+from vim_naver_dic import *
+from vim_dev_common import *
 
-" searchsentence = vim.eval("sentence")
-" papagostring = get_naver_papago(searchsentence)
-" create_new_buffer(papagostring)
+searchsentence = vim.eval("sentence")
+papagostring = get_naver_papago(searchsentence)
+create_new_buffer(papagostring)
 
-" endPython
+endPython
 
 endfunction
 
