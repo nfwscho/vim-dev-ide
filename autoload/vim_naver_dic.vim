@@ -21,14 +21,16 @@ function! s:get_visual_selection()
     return join(lines, "\n")
 endfunction
 
-function! vim_naver_dic#GetNaverDic(word)
+function! vim_naver_dic#GetNaverDic()
+let a:sentence = s:get_visual_selection()
+
 Py << endPython
 
 import vim, os
 from vim_naver_dic import *
 from vim_dev_common import *
 
-searchword = vim.eval("a:word")
+searchword = vim.eval("a:sentence")
 dicstring = get_naver_dic(searchword)
 create_new_buffer(dicstring)
 
@@ -37,19 +39,21 @@ endPython
 endfunction
 
 
-function! vim_naver_dic#GetNaverPapago(sentence)
-let a:word = s:get_visual_selection()
-Py << endPython
+function! vim_naver_dic#GetNaverPapago() abort
+echom "test!!!"
+let sentence = s:get_visual_selection()
 
-import vim, os
-from vim_naver_dic import *
-from vim_dev_common import *
+" Py << endPython
 
-searchsentence = vim.eval("a:word")
-papagostring = get_naver_papago(searchsentence)
-create_new_buffer(papagostring)
+" import vim, os
+" from vim_naver_dic import *
+" from vim_dev_common import *
 
-endPython
+" searchsentence = vim.eval("sentence")
+" papagostring = get_naver_papago(searchsentence)
+" create_new_buffer(papagostring)
+
+" endPython
 
 endfunction
 
