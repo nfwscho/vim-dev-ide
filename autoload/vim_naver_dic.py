@@ -52,6 +52,8 @@ class AngaeNaverDic:
 			self.search_result = '"{}"에 대한 검색결과가 없습니다.'.format(word)
 			return self.search_result
 
+		self.search_result += '** "{}"에 대한 네이버 검색결과\n'.format(word)
+
 		info = word_box.find('dd').find('p')
 
 		if info.find('span')['class'][0] == 'fnt_k05':
@@ -68,14 +70,6 @@ class AngaeNaverDic:
 		if phonetic_count == 2:
 			phonetic_alpha_uk = word_box.select('.fnt_e25')[1].text
 
-		## get audio file
-		audio_url = word_box.select('.btn_side_play')[0].attrs['playlist']
-		local_audio_filename = wget.download(audio_url, '/tmp/surpass.mp3')
-		p = vlc.MediaPlayer("file://" + local_audio_filename)
-		p.play()
-
-		meanings = word_box.select('dd p .fnt_k05')
-		# meaning = word_box.select('dd p .fnt_k05')[0].text
 
 		try:
 			examples = word_box.select('dd p .fnt_e07._ttsText')
@@ -83,21 +77,23 @@ class AngaeNaverDic:
 		except IndexError:
 			examples = None
 
-		self.search_result += '** "{}"에 대한 네이버 검색결과\n'.format(word)
-		# self.search_result += '='*80
-
 		if phonetic_alpha_us:
 			self.search_result += '* 발음기호 미국식: {}, '.format(phonetic_alpha_us)
-
 		if phonetic_alpha_uk:
 			self.search_result += '영국식: {} \n'.format(phonetic_alpha_uk)
+		## get audio file
+		try:
+			audio_url = word_box.select('.btn_side_play')[0].attrs['playlist']
+			local_audio_filename = wget.download(audio_url, '/tmp/surpass.mp3')
+			p = vlc.MediaPlayer("file://" + local_audio_filename)
+			p.play()
+		except IndexError:
+			self.search_result += "* 발음음성은 지원하지 않습니다.\n"
 
 		if word_class:
 			self.search_result += '* 품사: {}\n'.format(word_class)
 
-		# if meaning:
-		# 	self.search_result += '의미: {}\n'.format(meaning)
-
+		meanings = word_box.select('dd p .fnt_k05')
 		if meanings:
 			self.search_result += '* 의미: \n'
 			for i, val in enumerate(meanings):
