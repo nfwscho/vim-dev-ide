@@ -74,34 +74,49 @@ class AngaeNaverDic:
 		p = vlc.MediaPlayer("file://" + local_audio_filename)
 		p.play()
 
-		meaning = word_box.select('dd p .fnt_k05')[0].text
+		meanings = word_box.select('dd p .fnt_k05')
+		# meaning = word_box.select('dd p .fnt_k05')[0].text
 
 		try:
-			example = word_box.select('dd p .fnt_e07._ttsText')[0].text
+			examples = word_box.select('dd p .fnt_e07._ttsText')
+			# example = word_box.select('dd p .fnt_e07._ttsText')[0].text
 		except IndexError:
-			example = None
+			examples = None
 
-		self.search_result += '"{}"에 대한 검색결과\n'.format(word)
+		self.search_result += '** "{}"에 대한 네이버 검색결과\n'.format(word)
 		# self.search_result += '='*80
 
 		if phonetic_alpha_us:
-			self.search_result += ' {} \n'.format(phonetic_alpha_us)
+			self.search_result += '* 발음기호 미국식: {}, '.format(phonetic_alpha_us)
 
 		if phonetic_alpha_uk:
-			self.search_result += ' {} \n'.format(phonetic_alpha_uk)
+			self.search_result += '영국식: {} \n'.format(phonetic_alpha_uk)
 
 		if word_class:
-			self.search_result += '품사: {}\n'.format(word_class)
-		self.search_result += '의미: {}\n'.format(meaning)
+			self.search_result += '* 품사: {}\n'.format(word_class)
 
-		if example:
-			self.search_result += '예문: {}\n'.format(example)
+		# if meaning:
+		# 	self.search_result += '의미: {}\n'.format(meaning)
+
+		if meanings:
+			self.search_result += '* 의미: \n'
+			for i, val in enumerate(meanings):
+				self.search_result += '      {}. {} \n'.format(i+1, val.text.strip())
+			self.search_result += '\n'
+
+		if examples:
+			self.search_result += '* 예문:\n'.format(examples)
+			for i, val in enumerate(examples):
+				self.search_result += '      {}. {} \n'.format(i+1, val.text)
+			self.search_result += '\n'
 
 		return self.search_result
+
 
 def get_naver_dic(word='none'):
 	dicstring = AngaeNaverDic().search_naver_dic(word)
 	return dicstring
+
 
 def get_naver_papago(to='ko', text='none'):
 	papagostring = AngaeNaverDic().search_papago(to, text)
