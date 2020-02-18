@@ -80,7 +80,7 @@ class AngaeNaverDic:
 		if phonetic_alpha_us:
 			self.search_result += '* 발음기호 미국식: {}, '.format(phonetic_alpha_us)
 		if phonetic_alpha_uk:
-			self.search_result += '영국식: {} \n'.format(phonetic_alpha_uk)
+			self.search_result += '영국식: {}\n'.format(phonetic_alpha_uk)
 		## get audio file
 		try:
 			audio_url = word_box.select('.btn_side_play')[0].attrs['playlist']
@@ -95,15 +95,15 @@ class AngaeNaverDic:
 
 		meanings = word_box.select('dd p .fnt_k05')
 		if meanings:
-			self.search_result += '* 의미: \n'
+			self.search_result += '* 의미:\n'
 			for i, val in enumerate(meanings):
-				self.search_result += '      {}. {} \n'.format(i+1, val.text.strip())
+				self.search_result += '      {}. {}\n'.format(i+1, val.text.strip())
 			self.search_result += '\n'
 
 		if examples:
 			self.search_result += '* 예문:\n'.format(examples)
 			for i, val in enumerate(examples):
-				self.search_result += '      {}. {} \n'.format(i+1, val.text)
+				self.search_result += '      {}. {}\n'.format(i+1, val.text)
 			self.search_result += '\n'
 
 		return self.search_result
