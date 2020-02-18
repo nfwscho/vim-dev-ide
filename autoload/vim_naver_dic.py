@@ -52,7 +52,7 @@ class AngaeNaverDic:
 			self.search_result = '"{}"에 대한 검색결과가 없습니다.'.format(word)
 			return self.search_result
 
-		self.search_result += '** "{}"에 대한 네이버 검색결과\n'.format(word)
+		self.search_result += '** "{}"에 대한 네이버 사전 검색 결과\n'.format(word)
 
 		info = word_box.find('dd').find('p')
 
