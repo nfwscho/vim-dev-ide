@@ -53,6 +53,7 @@ class AngaeNaverDic:
 			return self.search_result
 
 		self.search_result += '** "{}"에 대한 네이버 사전 검색 결과\n'.format(word)
+		self.search_result += "* 쿼리 : " + self.dic_url + self.search_word + '\n'
 
 		info = word_box.find('dd').find('p')
 
