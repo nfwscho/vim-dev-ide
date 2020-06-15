@@ -4,7 +4,7 @@
 " Add our plugin to the path
 " --------------------------------
  if has("python3")
-     command! -nargs=1 Py py <args>
+     command! -nargs=1 Py py3 <args>
  else
      command! -nargs=1 Py py <args>
  endif
